@@ -1,7 +1,10 @@
 #!/bin/sh
-# this line works with the MEX compiled
-#octave -p "$SRC_DIR/matlabPyrTools/MEX" -p "$SRC_DIR/matlabPyrTools" -p "$SRC_DIR" --silent --eval "[im] = imread(\"$2\"); if (ndims(im) == 3) im=rgb2gray(im); end; [dm] = imread(\"$1\");if (ndims(dm) == 3) dm=rgb2gray(dm); end; printf(\"%f\n\",(iwssim(dm,im)))"
+# note this requires https://ece.uwaterloo.ca/~z70wang/research/iwssim/iwssim_iwpsnr.zip
+# and http://www.cns.nyu.edu/pub/eero/matlabPyrTools.tar.gz
+
 #PATH=`cwd`
 SRC_DIR=`dirname $0`
 octave  -p "$SRC_DIR/matlabPyrTools" -p "$SRC_DIR" --silent --eval "printf(\"%f\n\",(iwssim(rgb2gray(imread(\"$1\")), rgb2gray(imread(\"$2\")))))"
-#octave --eval "a"
+
+# this line works with the MEX compiled
+#octave -p "$SRC_DIR/matlabPyrTools/MEX" -p "$SRC_DIR/matlabPyrTools" -p "$SRC_DIR" --silent --eval "[im] = imread(\"$2\"); if (ndims(im) == 3) im=rgb2gray(im); end; [dm] = imread(\"$1\");if (ndims(dm) == 3) dm=rgb2gray(dm); end; printf(\"%f\n\",(iwssim(dm,im)))"
